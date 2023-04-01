@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -24,8 +25,14 @@ public class FragmentSecond extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        for (int i = 0; i < 200 ; i++) {
+            items.add(new Item("The Beatles", R.drawable.the_beatles));
+        }
         ListView listView = view.findViewById(R.id.listView);
         ListAdapter adapter = new ListAdapter(getContext(), R.layout.item_layout, items);
         listView.setAdapter(adapter);
+
+
     }
 }

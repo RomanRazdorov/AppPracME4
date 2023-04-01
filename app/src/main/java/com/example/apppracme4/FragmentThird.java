@@ -19,7 +19,7 @@ public class FragmentThird extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_third, container, false);
     }
 
     @Override
@@ -28,7 +28,9 @@ public class FragmentThird extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-
+        for (int i = 0; i < 200; i++) {
+            items.add(new Item("Linkin park", R.drawable.linkin_park));
+        }
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(items);
         recyclerView.setAdapter(adapter);
     }
