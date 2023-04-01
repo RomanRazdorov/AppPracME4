@@ -12,8 +12,13 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<MediaHolder> {
     private List<Item> items;
 
-    public RecyclerViewAdapter(List<Item> items) {
+    interface MyOnItemClickListener{
+        void onClick(Item item, int position);
+    }
+    private final MyOnItemClickListener myOnItemClickListener;
+    public RecyclerViewAdapter(List<Item> items, MyOnItemClickListener myOnItemClickListener) {
         this.items = items;
+        this.myOnItemClickListener = myOnItemClickListener;
     }
 
     @NonNull
@@ -30,6 +35,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MediaHolder> {
         Item item = items.get(position);
         holder.textView.setText(item.getArtistName());
         holder.imageView.setImageResource(item.getImageResourceId());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myOnItemClickListener.onClick(item,holder.getAdapterPosition());
+            }
+        });
     }
 
     @Override

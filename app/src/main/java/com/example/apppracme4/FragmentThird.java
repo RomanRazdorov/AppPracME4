@@ -1,9 +1,11 @@
 package com.example.apppracme4;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,12 +28,21 @@ public class FragmentThird extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        RecyclerViewAdapter.MyOnItemClickListener listener = new RecyclerViewAdapter.MyOnItemClickListener() {
+            @Override
+            public void onClick(Item item, int position) {
+                Log.i("RecyclerView", "Selected item " + position);
+                Toast.makeText(getContext(), "Selected item " + position, Toast.LENGTH_SHORT).show();
+            }
+        };
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         for (int i = 0; i < 200; i++) {
             items.add(new Item("Linkin park", R.drawable.linkin_park));
         }
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(items);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(items, listener);
         recyclerView.setAdapter(adapter);
+
     }
 }
